@@ -4,10 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
+    [SerializeField] private GameObject laserPrefab;
     [SerializeField] private float speed = 10f;
     [SerializeField][Tooltip("Porbably best to keep it at half the scale of the player, in Units")]
-    private float offsetFromScreen = 0.5f;
+    private float playerOffsetFromScreen = 0.5f;
+    [SerializeField] private Vector3 laserOffsetFromPlayer;
+    [SerializeField] private float fireRate = 0.3f;
+
     private float xMin, xMax, yMin, yMax;
+    private float nextFireTime = 0;
 
     private void Awake() {
         SetUpMoveBoundaries();
@@ -17,14 +22,37 @@ public class Player : MonoBehaviour {
         Camera gameCamera = Camera.main;
         Vector3 bottomLeftWorldPoint = gameCamera.ViewportToWorldPoint( Vector3.zero );
         Vector3 topRightWorldPoint = gameCamera.ViewportToWorldPoint( Vector3.one );
-        xMin = bottomLeftWorldPoint.x + offsetFromScreen;
-        xMax = topRightWorldPoint.x - offsetFromScreen;
-        yMin = bottomLeftWorldPoint.y + offsetFromScreen;
-        yMax = topRightWorldPoint.y - offsetFromScreen;
+        xMin = bottomLeftWorldPoint.x + playerOffsetFromScreen;
+        xMax = topRightWorldPoint.x - playerOffsetFromScreen;
+        yMin = bottomLeftWorldPoint.y + playerOffsetFromScreen;
+        yMax = topRightWorldPoint.y - playerOffsetFromScreen;
     }
 
     void Update() {
         Move();
+        TryFire();
+    }
+
+    private void TryFire() {
+        if ( CanFire() )
+            Instantiate( laserPrefab, transform.position + laserOffsetFromPlayer, Quaternion.identity );
+    }
+
+    private bool CanFire() {
+        if ( !FireButtonPressed() )
+            return false;
+
+        float currentTime = Time.time;
+
+        if ( currentTime < nextFireTime )
+            return false;
+
+        nextFireTime = currentTime + fireRate;
+        return true;
+    }
+
+    private static bool FireButtonPressed() {
+        return Input.GetAxis( "Fire1" ) > 0;
     }
 
     private void Move() {
