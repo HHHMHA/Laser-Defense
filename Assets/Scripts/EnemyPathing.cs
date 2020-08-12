@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyPathing : MonoBehaviour {
-    [SerializeField][Tooltip("List of waypoints that define an enemy path with thier positions")] private List<Transform> waypoints;
-    [SerializeField] float moveSpeed = 2f;
+    private WaveConfig waveConfig;
+    private List<Transform> waypoints;
     private int wayPointIndex = 0;
 
     public int WayPointIndex { get => wayPointIndex; }
+    public WaveConfig WaveConfig { get => waveConfig; set => waveConfig = value; }
 
     public int IncrementWayPointIndex() => ++wayPointIndex;
 
     public void Start() {
+        waypoints = waveConfig.GetWaypoints();
         InitializePositionToFirstWaypoint();
     }
 
@@ -31,7 +33,7 @@ public class EnemyPathing : MonoBehaviour {
 
     private void Move() {
         Vector3 targetPosition = waypoints[wayPointIndex].position;
-        float moveSpeedFrameIndependant = moveSpeed * Time.deltaTime;
+        float moveSpeedFrameIndependant = waveConfig.MoveSpeed * Time.deltaTime;
 
         Vector3 newPosition = Vector2.MoveTowards( transform.position, targetPosition, moveSpeedFrameIndependant );
         transform.position = newPosition;
