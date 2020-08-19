@@ -5,11 +5,18 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour {
     [SerializeField] private List<WaveConfig> waveConfigurations;
+    [SerializeField] private bool looping;
     private int startingWaveIndex = 0;
 
-    private void Start() {
-        var currentWave = waveConfigurations[startingWaveIndex];
-        StartCoroutine( SpawnAllEnemiesInWave( currentWave ) );
+    private IEnumerator Start() {
+        do {
+            yield return StartCoroutine( SpawnAllWaves() );
+        } while ( looping );
+    }
+
+    private IEnumerator SpawnAllWaves() {
+        foreach ( var wave in waveConfigurations )
+            yield return StartCoroutine( SpawnAllEnemiesInWave( wave ) );
     }
 
     private IEnumerator SpawnAllEnemiesInWave( WaveConfig waveConfig ) {
