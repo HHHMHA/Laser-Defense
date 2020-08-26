@@ -60,7 +60,7 @@ public class Player : MonoBehaviour {
         float verticalInput = Input.GetAxis( "Vertical" );
         Vector3 movement = new Vector2( horizontalInput * speed, verticalInput * speed );
         Vector3 balancedDiagonalMovement = Vector2.ClampMagnitude( movement, speed );
-        Vector3 frameIndependantMovement = balancedDiagonalMovement * Time.deltaTime;
+        Vector3 frameIndependantMovement = balancedDiagonalMovement * Time.deltaTime; // TODO this should be before calling ClampMag
         Vector3 newPosition = transform.position + frameIndependantMovement;
         Vector3 clampedPosition = new Vector3( Mathf.Clamp( newPosition.x, xMin, xMax ), Mathf.Clamp( newPosition.y, yMin, yMax ) );
         transform.position = clampedPosition;

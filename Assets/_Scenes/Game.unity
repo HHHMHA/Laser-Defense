@@ -537,6 +537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveConfigurations:
   - {fileID: 11400000, guid: 74ae962c342bfc04e9e114f324b72463, type: 2}
+  looping: 1
 --- !u!4 &1650511778
 Transform:
   m_ObjectHideFlags: 0
