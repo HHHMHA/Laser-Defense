@@ -12,8 +12,8 @@ public class Damagable : MonoBehaviour {
 
     private void TakeDamage( DamageDealer damageDealer ) {
         if ( damageDealer != null ) {
-            damageDealer.Hit();
             health -= damageDealer.Damage;
+            damageDealer.Hit();
 
             if ( health <= 0 )
                 Die();
