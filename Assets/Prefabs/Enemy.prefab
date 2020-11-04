@@ -110,6 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  explosionFXPrefab: {fileID: 9179615985896757421, guid: 951271d5685778f4db811551d97e97a3,
+    type: 3}
 --- !u!60 &7399369167424742782
 PolygonCollider2D:
   m_ObjectHideFlags: 0

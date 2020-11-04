@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Damagable : MonoBehaviour {
     [SerializeField] private int health = 100;
+    [SerializeField] private GameObject explosionFXPrefab;
 
     private void OnCollisionEnter2D( Collision2D other ) {
         DamageDealer damageDealer = other.gameObject.GetComponent<DamageDealer>();
@@ -11,16 +12,19 @@ public class Damagable : MonoBehaviour {
     }
 
     private void TakeDamage( DamageDealer damageDealer ) {
-        if ( damageDealer != null ) {
-            health -= damageDealer.Damage;
-            damageDealer.Hit();
+        if ( damageDealer == null )
+            return;
 
-            if ( health <= 0 )
-                Die();
-        }
+        health -= damageDealer.Damage;
+        damageDealer.Hit();
+
+        if ( health <= 0 )
+            Die();
     }
 
     private void Die() {
+        if ( explosionFXPrefab != null )
+            Instantiate( explosionFXPrefab, transform.position, Quaternion.identity );
         Destroy( gameObject );
     }
 }
