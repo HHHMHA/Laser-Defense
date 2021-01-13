@@ -33,9 +33,9 @@ public class EnemyPathing : MonoBehaviour {
 
     private void Move() {
         Vector3 targetPosition = waypoints[wayPointIndex].position;
-        float moveSpeedFrameIndependant = waveConfig.MoveSpeed * Time.deltaTime;
+        float moveSpeedFrameIndependent = waveConfig.MoveSpeed * Time.deltaTime;
 
-        Vector3 newPosition = Vector2.MoveTowards( transform.position, targetPosition, moveSpeedFrameIndependant );
+        Vector3 newPosition = Vector2.MoveTowards( transform.position, targetPosition, moveSpeedFrameIndependent );
         transform.position = newPosition;
 
         if ( transform.position == targetPosition )

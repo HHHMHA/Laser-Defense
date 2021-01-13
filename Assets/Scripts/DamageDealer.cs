@@ -7,6 +7,7 @@ public class DamageDealer : MonoBehaviour {
 
     public int Damage { get => damage; }
 
+    // TODO: not all damage dealers must be destroyed
     public void Hit() {
         Destroy( gameObject );
     }

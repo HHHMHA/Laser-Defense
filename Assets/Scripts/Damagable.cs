@@ -5,6 +5,7 @@ using UnityEngine;
 public class Damagable : MonoBehaviour {
     [SerializeField] private int health = 100;
     [SerializeField] private GameObject explosionFXPrefab;
+    [SerializeField] private AudioClip explosionAudioClip;
 
     private void OnCollisionEnter2D( Collision2D other ) {
         DamageDealer damageDealer = other.gameObject.GetComponent<DamageDealer>();
@@ -25,6 +26,8 @@ public class Damagable : MonoBehaviour {
     private void Die() {
         if ( explosionFXPrefab != null )
             Instantiate( explosionFXPrefab, transform.position, Quaternion.identity );
+        if (explosionAudioClip != null)
+            AudioSource.PlayClipAtPoint( explosionAudioClip, Camera.main.transform.position, 0.3f );
         Destroy( gameObject );
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private float speed = 10f;
-    [SerializeField][Tooltip("Porbably best to keep it at half the scale of the player, in Units")]
+    [SerializeField][Tooltip("Probably best to keep it at half the scale of the player, in Units")]
     private float playerOffsetFromScreen = 0.5f;
     [SerializeField] private Vector3 laserOffsetFromPlayer;
     [SerializeField] private float fireRate = 0.3f;
@@ -60,8 +60,8 @@ public class Player : MonoBehaviour {
         float verticalInput = Input.GetAxis( "Vertical" );
         Vector3 movement = new Vector2( horizontalInput * speed, verticalInput * speed );
         Vector3 balancedDiagonalMovement = Vector2.ClampMagnitude( movement, speed );
-        Vector3 frameIndependantMovement = balancedDiagonalMovement * Time.deltaTime; // TODO this should be before calling ClampMag
-        Vector3 newPosition = transform.position + frameIndependantMovement;
+        Vector3 frameIndependentMovement = balancedDiagonalMovement * Time.deltaTime; // TODO this should be before calling ClampMag
+        Vector3 newPosition = transform.position + frameIndependentMovement;
         Vector3 clampedPosition = new Vector3( Mathf.Clamp( newPosition.x, xMin, xMax ), Mathf.Clamp( newPosition.y, yMin, yMax ) );
         transform.position = clampedPosition;
     }

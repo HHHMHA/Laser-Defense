@@ -22,8 +22,8 @@ public class Laser : MonoBehaviour {
 
     void Update() {
         Vector3 movement = reverseDirection ? Vector3.down * speed : Vector3.up * speed;
-        Vector3 frameIndependantMovement = movement * Time.deltaTime;
-        transform.Translate( frameIndependantMovement );
+        Vector3 frameIndependentMovement = movement * Time.deltaTime;
+        transform.Translate( frameIndependentMovement );
     }
 
     private void OnCollisionEnter2D( Collision2D collision ) {
