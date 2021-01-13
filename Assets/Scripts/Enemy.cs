@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour {
 
     private IEnumerator Fire() {
         while( true ) {
-            GameObject laser = Instantiate( laserPrefab, transform.position, Quaternion.identity ); // TODO this will kill the enemy fix it
+            GameObject laser = Instantiate( laserPrefab, transform.position, Quaternion.identity );
             Laser laserScript = laser.GetComponent<Laser>();
             laserScript.ReverseDirection = true;
 

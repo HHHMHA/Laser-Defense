@@ -28,6 +28,13 @@ public class Damagable : MonoBehaviour {
             Instantiate( explosionFXPrefab, transform.position, Quaternion.identity );
         if (explosionAudioClip != null)
             AudioSource.PlayClipAtPoint( explosionAudioClip, Camera.main.transform.position, 0.3f );
+        if ( IsLastPlayer() ) {
+            FindObjectOfType<LevelLoader>().LoadGameOverScene();
+        }
         Destroy( gameObject );
+    }
+
+    private bool IsLastPlayer() {
+        return GetComponent<Player>() != null && FindObjectsOfType<Player>().Length == 1;
     }
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2747183319255315369}
   - component: {fileID: 7399369167424742782}
   - component: {fileID: 4972821320358930202}
+  - component: {fileID: 5553894433957361291}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
@@ -171,3 +172,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserPrefab: {fileID: 9145889620405424747, guid: 0cb3c88ae30de2f4b9b139a4e1d2ad5c,
     type: 3}
+--- !u!114 &5553894433957361291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7642783804884890064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e2372a5d83c1584daabf58fc1575a48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 999999

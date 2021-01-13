@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,7 +11,7 @@ public class LevelLoader : MonoBehaviour {
     }
 
     public void LoadGameOverScene() {
-        SceneManager.LoadScene( "Game Over" );
+        LoadScene( "Game Over", 1f );
     }    
     
     public void LoadStartMenuScene() {
@@ -19,6 +20,14 @@ public class LevelLoader : MonoBehaviour {
 
     public void LoadGameScene() {
         SceneManager.LoadScene( "Game" );
+    }
+
+    private void LoadScene( String sceneName, float delaySeconds ) {
+        StartCoroutine( LoadSceneWithDelay() );
+        IEnumerator LoadSceneWithDelay() {
+            yield return new WaitForSeconds( delaySeconds );
+            SceneManager.LoadScene( sceneName );
+        }
     }
 
     public void QuitGame() {
